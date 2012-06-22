@@ -8,7 +8,7 @@ class Basic_CRUD {
 	function __construct() {
 		//to test if singleon pattern ahs been implemented or not.
 		//DB::get()->handle();
-		DB::get();
+		DB::geat();
 	}	
 	
 	function insert_CRUD($post_variables = "") {

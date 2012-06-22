@@ -195,7 +195,7 @@ IS ELEMENT 2 [Element 3] => THIS IS ELEMENT 3 )
 }
 
 catch(Exception $e){
-   echo $e->getMessage();
+   throw $e->getMessage();
    exit();
 }
 //Read more at http://www.devshed.com/c/a/PHP/The-Basics-of-Using-the-Factory-Pattern-in-PHP-5/3/#LFWVuMjAfLiLkE7w.99
