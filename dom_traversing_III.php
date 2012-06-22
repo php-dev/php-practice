@@ -24,23 +24,27 @@ $(function () {
     //alert('daa');
     $(".test").click(function () {
         //$(this).toggleClass("selected");
-        var len = $(this).siblings() 
-                         .addClass("hilite_sib")
-                         .removeClass('hilite').length;
-        $(this).addClass("hilite").removeClass('hilite_sib');                  
-        $("b").text(len +" "+ $(this).text());
+        var len = $(this).siblings().length;
+        //alert(len);
+        $(this).siblings() 
+               .addClass("hilite_sib")
+               .removeClass('hilite')
+               .end()
+               .addClass("hilite")
+               .removeClass('hilite_sib').end();                  
+
+        //$(this).nextAll().text(len);
+        $(this).parent().next().html(len).prepend();
+       // $(this).parent().css("border","solid 2px black");
+        //$(this).offsetParent().css("border","solid 2px blue");
         //showParents();
-        var parentEls = $(this).parents()
+        var parentEls = $(this).parent().next()
             .map(function () { 
                   return this.tagName; 
                 })
             .get().join(", ");
         var parentEls_arr = parentEls.split(',');
-        parentEls_arr[1].each( function (){
-            
-        });
-        
-        //alert(parentEls);    
+        alert(parentEls);    
         
     });
 });
@@ -54,6 +58,7 @@ $(function () {
     <li class="test">Three</li>
     <li class='test'>Four</li>
   </ul>
+   <span><p>This Siblings: <b></b></p></span>
 
   <ul>
     <li class='test'>Five</li>
@@ -61,8 +66,9 @@ $(function () {
     <li class='test'>Seven</li>
 
   </ul>
+         <p>This Siblings: <b></b></p>
     </div>
-  <p>This Siblings: <b></b></p>
+ 
 <script>
 
 </script>
