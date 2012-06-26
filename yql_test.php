@@ -1,56 +1,80 @@
-<h2>Using YQL to Access the Upcoming API</h2>  
-    <form name='upcoming_form'>  
-    Location: <input name='location' id='location' type='text' size='20'/><br/>  
-    Event: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name='event' id='event' type='text' size='20'/><br/>  
-    <p><button id='find_event'>Find Event</button></p>  
+<form id="geosearch">  
+    <p><label for="query">Enter Location:</label>  
+    <input id="query" type="text"/></p>  
+    <p><input type="submit" value="Make Query"/></p>  
     </form>  
+    <div id="results"></div>  
       
     <script>  
-      // Attach event handler to button  
-      document.getElementById("find_event").addEventListener("click",find_event,false);  
-      // Get user input and submit form  
-      function find_event(){  
-        document.upcoming_form.event.value = document.getElementById('event').value || "music";  
-        document.upcoming_form.location.value = document.getElementById('location').value || "San Francisco";  
-        document.upcoming_form.submit();  
-      }   
-    </script>  
-    <?php  
-      $BASE_URL = "https://query.yahooapis.com/v1/public/yql";  
+    /*  
+      This example shows how to use YQL to   
+      make queries to the GEO Web service.  
+      The call to the YQL Web service uses   
+      2-legged OAuth and is made with OpenSocial   
+      functions.  
+    */   
+    function makeQuery(e){  
+      e.preventDefault(); // do not send off form   
+      var container = document.getElementById('results');  
+      var location = document.getElementById('query').value || 'SFO';  
+      var content = '';  
       
-      if(isset($_GET['event']) && isset($_GET['location'])){  
-        $location = $_GET['location'];  
-        $query = $_GET['event'];  
-        $events="";  
-           
-        // Form YQL query and build URI to YQL Web service  
-        $yql_query = "select * from upcoming.events where location='$location' and search_text='$query'";  
-        $yql_query_url = $BASE_URL . "?q=" . urlencode($yql_query) . "&format=json";  
+      var BASE_URI = 'http://query.yahooapis.com/v1/yql';  
       
-        // Make call with cURL  
-        $session = curl_init($yql_query_url);  
-        curl_setopt($session, CURLOPT_RETURNTRANSFER,true);  
-        $json = curl_exec($session);  
-        // Convert JSON to PHP object   
-        $phpObj =  json_decode($json);  
-      
-        // Confirm that results were returned before parsing  
-        if(!is_null($phpObj->query->results)){  
-          // Parse results and extract data to display  
-          foreach($phpObj->query->results->event as $event){  
-            $events .= "<div><h2>" . $event->name . "</h2><p>";  
-            $events .= html_entity_decode(wordwrap($event->description, 80, "<br/>"));  
-            $events .="</p><br/>$event->venue_name<br/>$event->venue_address<br/>";  
-            $events .="$event->venue_city, $event->venue_state_name";  
-            $events .="<p><a href=$event->ticket_url>Buy Tickets</a></p></div>";  
+      // function calling the opensocial makerequest method  
+      function runQuery(query, handler) {  
+        gadgets.io.makeRequest(BASE_URI, handler, {  
+            METHOD: 'POST',  
+            POST_DATA: toQueryString({q: query, format: 'json'}),  
+            CONTENT_TYPE: 'JSON',  
+            AUTHORIZATION: 'OAuth'  
+        });  
+      };  
+        
+      // Tool function to create a request string  
+      function toQueryString(obj) {  
+        var parts = [];  
+        for(var each in obj) if (obj.hasOwnProperty(each)) {  
+          parts.push(encodeURIComponent(each) + '=' +  
+                     encodeURIComponent(obj[each]));  
+        }  
+        return parts.join('&');  
+      };  
+        
+      // Run YQL query to GeoPlanet API and extract data from response    
+      runQuery('select * from geo.places where text="' + location + '"',  
+        function(rsp) {  
+          if(rsp.data){  
+            var place = rsp.data.query.results.place;  
+            if(place[0]){  
+              placeplace = place[0];  
+            }  
+            var name      = place.name || 'Unknown';  
+            var country   = place.country.content || place[0].country.content ||  
+                            'Unknown';  
+            var latitude  = place.centroid.latitude || 'Unknown';  
+            var longitude = place.centroid.longitude || 'Unknown';  
+            var city      = place.locality1.content || 'Unknown';  
+            var state     = place.admin1.content || 'Unknown';  
+            var county    = place.admin2.content || 'Unknown';  
+            var zip       = place.postal ? place.postal.content : 'Unknown';  
+        
+            content = '<ul><li><strong>Place Name: </strong>' + name + '</li>'+  
+            '<li><strong>City/Town: </strong>' + city + '</li>' +  
+            '<li><strong>County/District: </strong>' + county + '</li>' +  
+            '<li><strong>State/Province: </strong>' + state + '</li>' +  
+            '<li><strong>Zipcode: </strong>' + zip + '</li>' +  
+            '<li><strong>Country: </strong>' + country + '</li>' +  
+            '<li><strong>Latitude: </strong>' + latitude + '</li>' +  
+            '<li><strong>Longitude: </strong>' + longitude + '</li></ul>';  
+            container.innerHTML = content;  
           }  
-        }  
-        // No results were returned  
-        if(emptyempty($events)){  
-          $events = "Sorry, no events matching $query in $location";  
-        }  
-        // Display results and unset the global array $_GET  
-        echo $events;  
-        unset($_GET);  
-      }  
-    ?>  
+          else {  
+            container.innerHTML = gadgets.json.stringify(rsp);  
+          }  
+      });  
+    }  
+    // Create an event handler for submitting the form  
+    var form = document.getElementById('geosearch');  
+    form.addEventListener('submit',makeQuery,false);  
+    </script>  
