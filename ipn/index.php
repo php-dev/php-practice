@@ -11,9 +11,9 @@
 		<p>Please click the button below to receive login details for the download area. <br />
 		   Already have an account? <a href="login.php">Login</a> here.</p>
 		   
-		   Your PayPal Button Coder Here....
-
+		 
 	</div>
+    
 
 </body>
 </html>
