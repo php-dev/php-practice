@@ -39,15 +39,20 @@ $(function(){
             json: JSON.stringify({firstName: "Jose", lastName: "Romaniello"})
         }
     ).pipe(function(p){
-        return "Saved " + p.firstName;
+        //return "Saved " + p.firstName;
     });
-
-    post.done(function(r){ alert(r); });
+    post.done(function(r){ 
+        alert(r); 
+    });
     
 });
 </script>
     </head>
     <body>
-        <div>jQuery Resolved</div>
+        <div id="mother-div">
+        jQuery Resolved
+        http://joseoncode.com/2011/09/26/a-walkthrough-jquery-deferred-and-promise/
+        http://www.erichynds.com/jquery/using-deferreds-in-jquery/
+        </div>
     </body>
 </html>
