@@ -1,5 +1,6 @@
 <?php 
-//echo $_GET['msg'];
+
+echo 'added new line';//echo $_GET['msg'];
 
 //include basic crud file to access the class
 include_once 'basic_crud.php';
