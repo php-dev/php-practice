@@ -1,0 +1,165 @@
+﻿Object Oriented Programming (OOP)
+Git 8
+PHP 5 9
+CakePHP framework 9
+MySQL 9
+Javascript 8
+jQuery 9
+HTML 9
+CSS 8
+Linux/Unix based OS 8
+
+Questions:
+
+About OOP:
+How do you declare a function or method that you want to be accessed without instantiate the class?
+- By defining function static 
+
+Class AccessSpecifiers {
+
+	public static function testStatic() {
+			return false;
+	}
+}
+
+How do you create a child class of BaseClass ?
+- Through inheritence using keyword extends
+Class MyParent {}
+
+Class Son extends MyParent {}
+
+About GIT:
+
+If you accidentally add the wrong files to be commited using git add, how do you unstage them?
+- git rm --cached <file>
+
+If you want to switch to another branch, what command you need to execute?
+- git checkout branchName
+
+About PHP 5:
+
+Please write a conditional block of code that check if the variable $var exists, is not null and it's a number.
+- Solution:
+Class TestVar {
+
+	public static $var;
+
+	public static function checkVar($var) {
+		self::$var = $var;
+		if (property_exists(__CLASS__,'var') &&
+						!is_null(self::$var) &&
+						is_int(self::$var)) {
+			echo self::$var;
+		} else {
+			echo 'undefined var';
+		}
+	}
+}
+TestVar::checkVar(10);
+
+Write a function that adds a line to a log file the current date and time with this format: "[2013-09-23 00:30:15] - Status OK"
+- Solution :
+Class LogString {
+	
+	private $__var;
+
+	public function __construct() {
+		error_log("[".date("Y-m-d H:i:s")."] - Status OK", 3, "error.log");
+	}
+}
+
+$obj = new LogString();
+
+
+About CakePHP
+
+Which is the default path where you set up the configuration for the database?
+- /project/app/Config/database.php
+How you can get the value of a session variable with key "foo" using CakePHP ?
+- $this->Session->read('foo'); [$this is the reference to Controller child]
+
+About MySQL
+
+Write a single query to retrieve the information from 2 tables that are related( users and users_data) where the primary key on users is ID and the foreign key on users_data is USER_ID.
+- Query:
+		SELECT users.*, users_data.* FROM users
+		LEFT JOIN users_data
+		ON users_data.USER_ID = user.ID;
+
+Write a single query to retrieve all the queries that are currently running on the server .
+- Query
+		SHOW PROCESSLIST;
+
+About Javascript
+
+How do access to the alt attribute of the following image element using javascript? 
+- Using getElementsByTagName('img')[0].alt;
+ Example :
+	var testStr = '<img alt="ALT TEXT" src="myPic.jpg">';
+	var tmp = document.createElement('div');
+	tmp.innerHTML = testStr;
+	var alt = tmp.getElementsByTagName('img')[0].alt;
+
+
+What is the protocol name behind ajax?
+- JSON
+
+About jQuery
+
+Write a piece of javascript code using jQuery that make the element with id "someElement" to appear on the screen using a fade in effect after the DOM is loaded.
+- Solution :
+		$(document).ready(function () {
+			$("#someElement"). fadeTo( "slow", 0.12 );
+		});
+
+How do you remove an element from the DOM using jQuery?
+- .remove([selector])	
+
+About HTML
+
+Which is the doctype syntax for HTML5?
+<!DOCTYPE>
+
+Which is the attribute and value required on forms to allow file uploads?
+- The type="file" attribute of the <input> tag with value "file"
+
+About CSS
+
+Which is the css property and its value to force to hide the scroll on any DOM element with fixed height when its content exceed its own height?
+- overflow=hidden
+
+If you have to div elements next to each other with the property float:left, which CSS property do you need to add to the next element in order to get both of them to fill the same height on page and make the next one not a floating one?
+- Example:
+<style>
+body
+{
+margin:0;
+padding:0;
+}
+.container
+{
+position:relative;
+width:100%;
+}
+.right
+{
+float:left;
+width:150px;
+background-color:#b0e0e6;
+}
+</style>
+<div class="container">
+<div class="right">
+<p><b>Note: </b>When aligning using the position property, always include the !DOCTYPE declaration! If missing, it can produce strange results in IE browsers.</p>
+</div>
+<div style="position:relative; width:300px;">
+<p><b>Note: </b>When aligning using the position property, always include the !DOCTYPE declaration! If missing, it can produce strange results in IE browsers.</p>
+</div>
+</div>
+
+About Linux / Unix based OS
+
+Which protocol(s) you could use to connect to a server SHELL remotely?
+SSH
+Write a command to look for the word "logString" on all files with .ctp extension in the same director
+grep -rw "ads" /home/anit/*.ctp
