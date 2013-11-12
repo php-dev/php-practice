@@ -1,20 +1,15 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//TextProduct.php
+include_once('Product.php');
 
-include_once('Creator.php');
-include_once('TextProduct.php');
+class TextProduct implements Product {
 
-class TextFactory extends Creator {
+	private $mfgProduct;
 
-	protected function factoryMethod() {
-		$product=new TextProduct();
-		return($product->getProperties());
+	public function getProperties() {
+		$this->mfgProduct="This is text.";
+		return $this->mfgProduct;
 	}
 
 }
-
