@@ -1,6 +1,7 @@
 <?php
 //Client.php
 function __autoload($class_name) {
+//	echo $class_name."<br />";
 	include $class_name . '.php';
 }
 

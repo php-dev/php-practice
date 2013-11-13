@@ -1,12 +1,13 @@
 <?php
-//FemaleProto.php
+
+//MaleProto.php
 include_once('IPrototype.php');
 
-class FemaleProto extends IPrototype {
+class MaleProto extends IPrototype {
 
-	const gender="FEMALE";
+	const gender="MALE";
 
-	public $fecundity;
+	public $mated;
 
 	public function __construct() {
 		$this->eyeColor="red";
@@ -15,4 +16,5 @@ class FemaleProto extends IPrototype {
 	}
 
 	function __clone(){}
+
 }
