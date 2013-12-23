@@ -11,8 +11,8 @@ class Client {
 	private $dollarRequest;
 
 	public function __construct() {
-		$this->requestNow=new EuroAdapter();
-		$this->dollarRequest=new DollarCalc();
+		$this->requestNow = new EuroAdapter();
+		$this->dollarRequest = new DollarCalc();
 		$euro="&#8364;";
 
 		echo "Euros: $euro" . $this->makeAdapterRequest($this->requestNow) .
