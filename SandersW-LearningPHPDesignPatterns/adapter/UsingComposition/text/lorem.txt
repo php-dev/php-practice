@@ -1,0 +1,7 @@
+This will tell the component that you want to re-use a CSRF token until it expires - which is controlled by the csrfExpires value. If you are having issues with expired tokens, this is a good balance between security and ease of use.
+
+Disabling the CSRF protection
+There may be cases where you want to disable CSRF protection on your forms for some reason. If you do want to disable this feature, you can set $this->Security->csrfCheck = false; in your beforeFilter or use the components array. By default CSRF protection is enabled, and configured to use one-use tokens.
+
+Disabling Security Component For Specific Actions
+There may be cases where you want to disable all security checks for an action (ex. AJAX requests). You may “unlock” these actions by listing them in $this->Security->unlockedActions in your beforeFilter.
