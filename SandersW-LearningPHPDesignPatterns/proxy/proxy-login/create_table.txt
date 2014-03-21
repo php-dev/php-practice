@@ -1,0 +1,2 @@
+Old table proxyLog has been dropped.<br/>CREATE TABLE proxyLog (uname NVARCHAR(15),
+    pw NVARCHAR(120)

@@ -1,0 +1,32 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 20, 2014, 4:07:05 PM
+    Author     : Anit Shrestha
+*/
+
+@charset "UTF-8";
+/* CSS Document */
+/*EFECCA,046380,002F2F */
+body {
+margin-left:20px;
+font-family:Verdana, Geneva, sans-serif;
+background-color:#EFECCA;
+}
+header {
+    font-family: "Arial Black", Gadget, sans-serif;
+font-size:24px;
+color:#002F2F;
+}
+#entry {
+font-size:11;
+color:#046380;
+}
+.subhead
+{
+font-size:16px;
+font-family:Verdana, Geneva, sans-serif;
+}
