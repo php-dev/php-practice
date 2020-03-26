@@ -1,4 +1,5 @@
-practise
-========
 
-this repo contains the things that i have practise.
+# PHP practise code of @codeanit
+
+> TODO
+> This will be streamlined for better usage.
